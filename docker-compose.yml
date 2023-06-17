@@ -1,0 +1,22 @@
+version: "3"
+services:
+    db:
+        container_name: mysqldbxyz
+        image: mysql:5.7
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: test
+            MYSQL_ROOT_PASSWORD: password
+    app:
+        container_name: sparkxyz
+        links:
+            - "db"
+        build: ./
+        ports:
+            - "8001:8000"
+        environment:
+          MYSQL_USER: root
+          MYSQL_PASSWORD: password
+          MYSQL_PORT: 3306
+          MYSQL_HOST: mysqldbxyz
