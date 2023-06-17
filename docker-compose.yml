@@ -1,22 +1,32 @@
 version: "3"
 services:
-    db:
-        container_name: mysqldbxyz
-        image: mysql:5.7
-        ports:
-            - "3306:3306"
-        environment:
-            MYSQL_DATABASE: test
-            MYSQL_ROOT_PASSWORD: password
-    app:
-        container_name: sparkxyz
-        links:
-            - "db"
-        build: ./
-        ports:
-            - "8001:8000"
-        environment:
-          MYSQL_USER: root
-          MYSQL_PASSWORD: password
-          MYSQL_PORT: 3306
-          MYSQL_HOST: mysqldbxyz
+  db:
+    container_name: db
+    image: mysql:8.0.32
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+    environment:
+      MYSQL_USER: alpha
+      MYSQL_ROOT_PASSWORD: abcxyz
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: test
+    restart: always
+  app:
+    container_name: sparkxyz
+    depends_on:
+      - db
+    links:
+      - db
+    build: ./
+    ports:
+      - "8000:8000"
+    expose:
+      - 8000
+    environment:
+      MYSQL_USER: alpha
+      MYSQL_PASSWORD: password
+      MYSQL_PORT: 3306
+      MYSQL_HOST: db
+    restart: always
