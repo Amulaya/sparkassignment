@@ -7,17 +7,18 @@ user = APIRouter()
 user_schema = Users()
 
 
-def show_data(query):
+def show_data(result):
     res = []
-    for info in query:
-        res_dict = {
-            "id": info.tuple()[0],
-            "name": info.tuple()[1],
-            "email": info.tuple()[2],
-            "password": info.tuple()[3],
+    for info in result:
+        if info is not None:
+            res_dict = {
+                "id": info.tuple()[0],
+                "name": info.tuple()[1],
+                "email": info.tuple()[2],
+                "password": info.tuple()[3],
 
-        }
-        res.append(res_dict)
+            }
+            res.append(res_dict)
     return {"user": res}
 
 

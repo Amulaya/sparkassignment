@@ -19,6 +19,7 @@ req_headers = {
 }
 result = {'Deal_Date': [], 'Security_Code': [], 'Security_Name': [], 'Client_Name': [], 'Deal_Type': [], 'Quantity': [],
           'Price': []}
+print("         Parsing the URL to get the data         ")
 res = requests.get("https://www.bseindia.com/markets/equity/EQReports/bulk_deals.aspx", headers=req_headers)
 
 soup = BeautifulSoup(res.text, 'html.parser')
@@ -37,11 +38,11 @@ for row in rows:
     result['Price'].append(cells[6].text)
 
 # create a dataframe to store data and then pushing it to the daily_run_data table
+print("      Appending the result to view in table       ")
 df = pd.DataFrame.from_dict(result)
-
 
 engine = create_engine('mysql+pymysql://{}:{}@{}:{}/test'.format(config('MYSQL_USER'), config('MYSQL_PASSWORD'),
                                                                  config('MYSQL_HOST'), config('MYSQL_PORT')))
 
-
 df.to_sql(con=engine, name='daily_run_data', if_exists='append', index=False)
+print(" The Data has been moved to the table daily_run_data inside test db ")
