@@ -4,9 +4,9 @@ services:
     container_name: db
     image: mysql:8.0.32
     ports:
-      - "3306:3306"
+      - "3307:3306"
     expose:
-      - 3306
+      - 3307
     environment:
       MYSQL_USER: alpha
       MYSQL_ROOT_PASSWORD: abcxyz
@@ -21,9 +21,9 @@ services:
       - db
     build: ./
     ports:
-      - "8000:8000"
+      - "8001:8000"
     expose:
-      - 8000
+      - 8001
     environment:
       MYSQL_USER: alpha
       MYSQL_PASSWORD: password
