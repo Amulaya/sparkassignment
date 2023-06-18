@@ -41,8 +41,8 @@ for row in rows:
 print("      Appending the result to view in table       ")
 df = pd.DataFrame.from_dict(result)
 
-engine = create_engine('mysql+pymysql://{}:{}@{}:{}/test'.format(config('MYSQL_USER'), config('MYSQL_PASSWORD'),
-                                                                 config('MYSQL_HOST'), config('MYSQL_PORT')))
+engine = create_engine('mysql+pymysql://{}:{}@{}:{}/test'.format("alpha", "password",
+                                                                 "localhost", 3306))
 
 df.to_sql(con=engine, name='daily_run_data', if_exists='append', index=False)
 print(" The Data has been moved to the table daily_run_data inside test db ")
