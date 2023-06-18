@@ -16,9 +16,9 @@ Docker to be created and run with
 
 ### For API to perform CURD operations
 
-> docker compose build
+> sudo docker compose build
 
-> docker compose up
+> sudo docker compose up
 
 ### For Web scrapping part
 
